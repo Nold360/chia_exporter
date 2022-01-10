@@ -1,4 +1,6 @@
-# chia_exporter
+# Chia Fork Exporter
+
+Prometheus exporter for Chia blockchain & it's forks.
 
 [Prometheus](https://prometheus.io) metric collector for
 [Chia](https://chia.net) nodes, using the local [RPC
@@ -54,6 +56,8 @@ With the [Go](http://golang.org) compiler tools installed:
 
 Run `./chia_exporter -h` to see the command configuration options:
 
+    -fork string
+    	The chia fork to export metrics for (default "chia")
     -cert string
           The full node SSL certificate. (default "$HOME/.chia/mainnet/config/ssl/full_node/private_full_node.crt")
     -key string
