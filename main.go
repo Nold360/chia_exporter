@@ -47,12 +47,33 @@ var (
 )
 
 var (
-	Version = "0.5.2"
+	Version = "0.6.0"
 )
+
+func isSet(name string) bool {
+  var _, val = os.LookupEnv(name)
+  return val
+}
 
 func main() {
 	log.Printf("chia_fork_exporter version %s", Version)
 	flag.Parse()
+
+        if(isSet("CHIA_FORK")) {
+          *fork = os.Getenv("CHIA_FORK")
+        }
+        if(isSet("FULL_NODE_CERT")) {
+          *cert = os.Getenv("FULL_NODE_CERT")
+        }
+        if(isSet("FULL_NODE_KEY")) {
+          *key = os.Getenv("FULL_NODE_KEY")
+        }
+        if(isSet("FULL_NODE_RPC_ENDPOINT")) {
+          *url = os.Getenv("FULL_NODE_RPC_ENDPOINT")
+        }
+        if(isSet("WALLET_RPC_ENDPOINT")) {
+          *wallet = os.Getenv("WALLET_RPC_ENDPOINT")
+        }
 
 	var ports ForkPort
 	for _, v := range forkPorts {
@@ -63,17 +84,17 @@ func main() {
 
 	if ports.Name != *fork {
 		log.Printf("WARNING: Unknown fork '%s', using default configuration!", *fork)
-		log.Printf("         Make sure to configure all rpc ports manually!", *fork)
+		log.Printf("         Make sure to configure all rpc ports manually!")
 	} else {
 		portRegex := regexp.MustCompile(`0000$`)
 		forkRegex := regexp.MustCompile(`\{FORK\}`)
 
-		*url = portRegex.ReplaceAllString(*url, strconv.Itoa(ports.FullNodePort))
-		*harvester = portRegex.ReplaceAllString(*harvester, strconv.Itoa(ports.HarvesterPort))
-		*farmer = portRegex.ReplaceAllString(*farmer, strconv.Itoa(ports.FarmerPort))
-		*wallet = portRegex.ReplaceAllString(*wallet, strconv.Itoa(ports.WalletPort))
-		*cert = forkRegex.ReplaceAllString(*cert, *fork)
-		*key = forkRegex.ReplaceAllString(*key, *fork)
+		*url            = portRegex.ReplaceAllString(*url,       strconv.Itoa(ports.FullNodePort))
+		*harvester      = portRegex.ReplaceAllString(*harvester, strconv.Itoa(ports.HarvesterPort))
+		*farmer         = portRegex.ReplaceAllString(*farmer,    strconv.Itoa(ports.FarmerPort))
+		*wallet         = portRegex.ReplaceAllString(*wallet,    strconv.Itoa(ports.WalletPort))
+		*cert           = forkRegex.ReplaceAllString(*cert, *fork)
+		*key            = forkRegex.ReplaceAllString(*key,  *fork)
 		log.Printf("Using fork '%s', with these parameters:", *fork)
 		log.Printf(" - cert: %s", *cert)
 		log.Printf(" - key: %s", *key)
@@ -82,6 +103,7 @@ func main() {
 		log.Printf(" - farmer: %s", *farmer)
 		log.Printf(" - wallet: %s", *wallet)
 	}
+
 
 	client, err := newClient(os.ExpandEnv(*cert), os.ExpandEnv(*key))
 	if err != nil {
