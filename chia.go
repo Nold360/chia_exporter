@@ -199,7 +199,7 @@ var forkPorts = []ForkPort {
 		FarmerPort: 6759,
 	},
 	ForkPort {
-		Name:"n-chain",
+		Name:"nchain",
 		Symbol: "NCH",
 		FullNodePort: 38555,
 		WalletPort: 39256,
