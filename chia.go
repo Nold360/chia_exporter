@@ -423,7 +423,7 @@ var forkPorts = []ForkPort {
 		FarmerPort: 7559,
 	},
 	ForkPort {
-		Name:"stai",
+		Name:"staicoin",
 		Symbol: "STAI",
 		FullNodePort: 8155,
 		WalletPort: 1736,
