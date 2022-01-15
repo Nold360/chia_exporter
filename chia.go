@@ -209,10 +209,10 @@ var forkPorts = []ForkPort {
 	ForkPort {
 		Name:"chives",
 		Symbol: "XCC",
-		FullNodePort: 9755,
+		FullNodePort: 9699,
 		WalletPort: 9856,
 		HarvesterPort: 9760,
-		FarmerPort: 11759,
+		FarmerPort: 9647,
 	},
 	ForkPort {
 		Name:"spare",
@@ -485,5 +485,13 @@ var forkPorts = []ForkPort {
 		WalletPort: 29556,
 		HarvesterPort: 29360,
 		FarmerPort: 29339,
+	},
+	ForkPort {
+		Name:"stor",
+		Symbol: "STOR",
+		FullNodePort: 8155,
+		WalletPort: 9236,
+		HarvesterPort: 8360,
+		FarmerPort: 8553,
 	},
 }
