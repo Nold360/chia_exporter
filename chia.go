@@ -225,10 +225,10 @@ var forkPorts = []ForkPort {
 	ForkPort {
 		Name:"silicoin",
 		Symbol: "SIT",
-		FullNodePort: 22222,
+		FullNodePort: 22555,
 		WalletPort: 22256,
 		HarvesterPort: 22560,
-		FarmerPort: 22447,
+		FarmerPort: 22559,
 	},
 	ForkPort {
 		Name:"flora",
