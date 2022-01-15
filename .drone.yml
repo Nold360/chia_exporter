@@ -1,0 +1,20 @@
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+- name: build-image
+  image: plugins/kaniko
+  environment:
+    # Workaround for Kanikos container detection
+    container: docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: nold360/chia_fork_exporter
+    dockerfile: Dockerfile
+    tags:
+      - v0.6.0
+      - latest
