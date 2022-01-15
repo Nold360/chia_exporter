@@ -13,7 +13,7 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    repo: nold360/chia_fork_exporter
+    repo: nold360/chia-fork-exporter
     dockerfile: Dockerfile
     tags:
       - v0.6.0
