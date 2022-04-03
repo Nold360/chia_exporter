@@ -4,7 +4,7 @@ WORKDIR /build
 COPY . /build/chia_exporter
 RUN apk add --update --no-cache --virtual build-dependencies \
  && cd chia_exporter \
- && go build -tags netgo
+ && go build -tags netgo -buildvcs=false
 
 FROM alpine
 COPY --from=builder /build/chia_exporter/chia_exporter /usr/bin/chia_exporter
